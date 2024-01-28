@@ -13,6 +13,8 @@ import { CategoryModule } from './category/category.module';
 import { Category } from './category/entities';
 import { ProductModule } from './product/product.module';
 import { Product } from './product/entities';
+import { MediaModule } from './media/media.module';
+import { Media } from './media/entities';
 
 
 @Module({
@@ -37,13 +39,14 @@ import { Product } from './product/entities';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Admin, Customer, Category, Product],
+      entities: [Admin, Customer, Category, Product, Media],
       synchronize: true,
     }),
     AdminModule,
     CustomerModule,
     CategoryModule,
-    ProductModule
+    ProductModule,
+    MediaModule
   ],
   controllers: [],
   providers: [],

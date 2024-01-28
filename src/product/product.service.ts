@@ -27,7 +27,7 @@ export class ProductService {
                           status:HttpStatus.CONFLICT
     }
 
-    const new_product = await this.productRepository.save({...createProductDto, category_id:Number(createProductDto.category)})
+    const new_product = await this.productRepository.save({...createProductDto, category_id:Number(createProductDto.category),  created_at:new Date(), updated_at:new Date()})
 
     return {
             message:"Succesfully Created",
@@ -51,7 +51,7 @@ export class ProductService {
   }
 
   async findOneProduct(id: number) {
-    const product = await this.productRepository.find({where:{product_id:id}, relations:["category"]})
+    const product = await this.productRepository.find({where:{product_id:id}, relations:["category", "photos"]})
 
     if(!product) return{
                           message:"Product Not Found",
@@ -85,7 +85,8 @@ export class ProductService {
       },
       {
         ...updateProductDto,
-        category_id:Number(updateProductDto.category)
+        category_id:Number(updateProductDto.category),
+        updated_at:new Date()
       }
      )
 

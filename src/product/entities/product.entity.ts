@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from '../../category/entities';
+import { Media } from '../../media/entities/media.entity';
 
 @Entity('product')
 export class Product {
@@ -45,11 +46,11 @@ export class Product {
   updated_at: Date;
   
   @ApiProperty({ example: '4.5', description: 'Product Raiting'})
-  @Column({type: 'integer'})
+  @Column({type: 'integer', default:0})
   rating: number;
   
   @ApiProperty({ example: true, description: 'Product is active'})
-  @Column({type: 'boolean'})
+  @Column({type: 'boolean', default:true})
   is_active: boolean;
 
   @ApiProperty({ example: 'Hi its a good product', description: 'Product description'})
@@ -62,4 +63,7 @@ export class Product {
 
   @ManyToOne(() => Category, category => category.products)
   category: Category;
+
+  @OneToMany(() => Media, media => media.product)
+  photos: Media[];
 }
