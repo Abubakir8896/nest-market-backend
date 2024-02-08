@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from '../../category/entities';
+import { DiscountProduct } from '../../discount_product/entities';
 import { Media } from '../../media/entities/media.entity';
 
 @Entity('product')
@@ -66,4 +67,7 @@ export class Product {
 
   @OneToMany(() => Media, media => media.product)
   photos: Media[];
+
+  @ManyToOne(() => DiscountProduct, discount_product => discount_product.product)
+  discount: DiscountProduct;
 }

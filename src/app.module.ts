@@ -15,6 +15,10 @@ import { ProductModule } from './product/product.module';
 import { Product } from './product/entities';
 import { MediaModule } from './media/media.module';
 import { Media } from './media/entities';
+import { DiscountModule } from './discount/discount.module';
+import { Discount } from './discount/entities';
+import { DiscountProductModule } from './discount_product/discount_product.module';
+import { DiscountProduct } from './discount_product/entities';
 
 
 @Module({
@@ -39,14 +43,16 @@ import { Media } from './media/entities';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Admin, Customer, Category, Product, Media],
+      entities: [Admin, Customer, Category, Product, Media, Discount, DiscountProduct],
       synchronize: true,
     }),
     AdminModule,
     CustomerModule,
     CategoryModule,
     ProductModule,
-    MediaModule
+    MediaModule,
+    DiscountModule,
+    DiscountProductModule
   ],
   controllers: [],
   providers: [],
